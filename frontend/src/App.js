@@ -1,7 +1,17 @@
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import { Container } from "react-bootstrap";
+import HomeScreen from "./screens/HomeScreen";
 const App = () => {
   return (
     <>
-      <h1>Welcome to Clickcart</h1>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <HomeScreen />
+        </Container>
+      </main>
+      <Footer />
     </>
   );
 };
