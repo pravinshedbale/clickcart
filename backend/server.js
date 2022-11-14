@@ -1,25 +1,37 @@
-const expres = require("express");
-const products = require("./data/products");
-const app = expres();
+import express from "express";
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import productRoutes from "./routes/productRoutes.js";
+import {
+  customErrorHandler,
+  resourceNotFound,
+} from "./middlewares/customErrorHandler.js";
 
-app.use((req, res, next) => {
+// Environment Configuration
+dotenv.config();
+
+// Connect to DB
+connectDB();
+
+// Server Initialization
+const app = express();
+
+/* Routes and Middlewares */
+app.use((err, req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-
 app.get("/", (req, res) => {
   res.send("API is working");
 });
+app.use("/api/products", productRoutes);
 
-app.get("/api/products", (req, res) => {
-  res.status(200).json(products);
-});
+/* Error Handler Middleware : Should be at very last*/
+app.use(resourceNotFound);
+app.use(customErrorHandler);
 
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  product
-    ? res.status(200).json(product)
-    : res.json({ message: "Product not found" });
-});
-
-app.listen(8000, console.log("Server running at port 8000"));
+const PORT = process.env.PORT;
+app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} at port ${PORT}`)
+);

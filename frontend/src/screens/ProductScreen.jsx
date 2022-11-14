@@ -23,7 +23,7 @@ const ProductScreen = () => {
     };
     fetchProduct();
   }, [params.id]);
-  // const product = products.find((p) => p._id === params.id);
+
   return (
     <>
       <Link className="btn btn-light my-3" to={"/"}>
@@ -47,9 +47,7 @@ const ProductScreen = () => {
             <ListGroup.Item>
               Price : ₹{Math.ceil(product.price * 80)}
             </ListGroup.Item>
-            <ListGroup.Item>
-              Description : ₹{product.description}
-            </ListGroup.Item>
+            <ListGroup.Item>Description : {product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
