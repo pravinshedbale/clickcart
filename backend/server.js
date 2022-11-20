@@ -1,7 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
+
+// Routes
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import {
   customErrorHandler,
   resourceNotFound,
@@ -17,14 +20,13 @@ connectDB();
 const app = express();
 
 /* Routes and Middlewares */
+app.use(express.json());
 app.use((err, req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-app.get("/", (req, res) => {
-  res.send("API is working");
-});
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 /* Error Handler Middleware : Should be at very last*/
 app.use(resourceNotFound);

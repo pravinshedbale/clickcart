@@ -5,16 +5,21 @@ import {
   productDetailsReducer,
   productListReducer,
 } from "./reducers/productReducer";
+import { userLoginReducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
+import { getLocalStorageItem } from "../util/getFromLS";
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
+  user: userLoginReducer,
 });
-const cartItemsFromLS = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
-  : [];
-const initialState = { cart: { cartItems: cartItemsFromLS } };
+const cartItemsFromLS = getLocalStorageItem("cartItems", []);
+const userInfoFromLS = getLocalStorageItem("userInfo", null);
+const initialState = {
+  cart: { cartItems: cartItemsFromLS },
+  user: { userInfo: userInfoFromLS },
+};
 const middleware = [thunk];
 const store = createStore(
   reducer,
