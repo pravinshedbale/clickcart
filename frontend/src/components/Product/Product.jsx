@@ -22,7 +22,7 @@ const Product = ({ product }) => {
             />
           </div>
         </Card.Text>
-        <Card.Text as="h3">₹{Math.ceil(product.price * 80)}</Card.Text>
+        <Card.Text as="h3">₹{product.price}</Card.Text>
       </Card.Body>
     </Card>
   );

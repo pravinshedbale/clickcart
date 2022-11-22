@@ -56,9 +56,7 @@ const ProductScreen = () => {
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item>
-                Price : ₹{Math.ceil(product.price * 80)}
-              </ListGroup.Item>
+              <ListGroup.Item>Price : ₹{product.price}</ListGroup.Item>
               <ListGroup.Item>
                 Description : {product.description}
               </ListGroup.Item>
@@ -70,7 +68,7 @@ const ProductScreen = () => {
                 <ListGroupItem>
                   <Row>
                     <Col>Price</Col>
-                    <Col>₹{Math.ceil(product.price * 80)}</Col>
+                    <Col>₹{product.price}</Col>
                   </Row>
                 </ListGroupItem>
                 <ListGroupItem>
