@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Message from "../components/Message/Message";
 import {
   Row,
@@ -18,6 +18,7 @@ const CartScreen = () => {
   const params = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const productId = params.id;
   const qty = location.search ? +location.search.split("=")[1] : 1;
   useEffect(() => {
@@ -29,7 +30,9 @@ const CartScreen = () => {
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   };
-  const checkoutHandler = () => {};
+  const checkoutHandler = () => {
+    navigate("/login?redirect=shipping");
+  };
   return (
     <Row>
       <Col md={8}>
@@ -94,9 +97,7 @@ const CartScreen = () => {
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
               </h2>
               ₹{" "}
-              {Math.ceil(
-                cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)
-              ) * 80}
+              {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}
             </ListGroupItem>
             <ListGroupItem>
               <Button

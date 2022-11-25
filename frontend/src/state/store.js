@@ -24,8 +24,9 @@ const reducer = combineReducers({
 });
 const cartItemsFromLS = getLocalStorageItem("cartItems", []);
 const userInfoFromLS = getLocalStorageItem("userInfo", null);
+const shippingAddressFromLS = getLocalStorageItem("shippingAddress", {});
 const initialState = {
-  cart: { cartItems: cartItemsFromLS },
+  cart: { cartItems: cartItemsFromLS, shippingAddress: shippingAddressFromLS },
   userLogin: { userInfo: userInfoFromLS },
 };
 const middleware = [thunk];
