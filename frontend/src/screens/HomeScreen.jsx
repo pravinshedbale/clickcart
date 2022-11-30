@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product/Product";
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ import Message from "../components/Message/Message";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-
+  const [isChecked, setIsChecked] = useState(false);
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);

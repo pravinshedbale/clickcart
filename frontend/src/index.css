@@ -18,3 +18,7 @@ a:link {
 a:link:hover {
   font-weight: bold;
 }
+
+.btn-block {
+  width: 100%;
+}
